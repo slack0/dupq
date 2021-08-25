@@ -32,7 +32,7 @@ if __name__ == '__main__':
     on test data
     '''
     qd.evaluate_model()
-    
+
     ''' test sample questions '''
     q1 = 'What is the weather like?'
     q2 = 'Is it hot today?'

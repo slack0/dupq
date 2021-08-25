@@ -101,6 +101,7 @@ class DecomposeAttention(object):
         self.log_tensorflow_run = False
 
 
+    @runtime
     def download_data(self):
 
         '''
@@ -132,7 +133,7 @@ class DecomposeAttention(object):
             request.urlretrieve('{:s}/{:s}'.format(QUORA_URL, QUORA_DATA))
             print 'Done'
 
-
+    @runtime
     def load_data(self):
 
         '''
@@ -175,7 +176,7 @@ class DecomposeAttention(object):
 
         return train, test
 
-
+    @runtime
     def process_data(self):
 
         '''
@@ -209,6 +210,7 @@ class DecomposeAttention(object):
         self.test = pad_data(self.test)
 
 
+    @runtime
     def process_glove(self):
 
         '''
@@ -251,7 +253,7 @@ class DecomposeAttention(object):
         np.save('data/GloVe_' + self.__dataset + '.npy', embed_matrix)
         open('unknown_words.txt', 'w').write(str(unknown))
 
-
+    @runtime
     def process_embedding(self):
 
         '''
@@ -271,7 +273,7 @@ class DecomposeAttention(object):
                                 weights = [embed_matrix],
                                 name = 'embed_quora')
 
-
+    @runtime
     def gen_attn_model(self, test_mode = False):
 
         '''
@@ -366,7 +368,7 @@ class DecomposeAttention(object):
         q1_q2_final = Dense(2, activation='softmax')(q1_q2_final)
         self.model = Model(inputs=[question1, question2], outputs=q1_q2_final)
 
-
+    @runtime
     def compile_model(self, use_existing_weights=False):
 
         '''
@@ -390,6 +392,7 @@ class DecomposeAttention(object):
                 print 'Load weights UNSUCCESSFUL. Cannot find weights file: {}'.format(chkpt_file)
 
 
+    @runtime
     def train_model(self, n_epochs=None):
 
         '''
@@ -414,6 +417,7 @@ class DecomposeAttention(object):
                     callbacks = t_cbks)
 
 
+    @runtime
     def evaluate_model(self, use_existing_weights=True):
 
         '''
@@ -500,14 +504,6 @@ class DecomposeAttention(object):
             return 'yes'
         else:
             return 'no'
-
-
-
-
-
-
-
-
 
 
 
